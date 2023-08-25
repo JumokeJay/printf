@@ -1,10 +1,10 @@
 #include "main.h"
-int _printf(const char *format, ...);
 /*
  * _printf - the function to print
- * @format: the format
+ * @format: the format type to print
  * Return: the result of the code
  */
+
 int _printf(const char *format, ...)
 {
 	va_list args;
@@ -14,11 +14,9 @@ int _printf(const char *format, ...)
 
 	while (*format != '\0')
 	{
-	if (*format == '%')
-	{
+	if (*format == '%') {
 	format++; // Move past the '%'
-	if (*format == 'c')
-	{
+	if (*format == 'c') {
 	char c = (char)va_arg(args, int);
 	putchar(c);
 	count++;
@@ -32,6 +30,12 @@ int _printf(const char *format, ...)
 	str++;
 	count++;
 	}
+	}
+	else if (*format == 'd' || *format == 'i')
+	{
+	int num = va_arg(args, int);
+	printf("%d", num);
+	count++; // Counting digits of the number
 	}
 	else if (*format == '%')
 	{
